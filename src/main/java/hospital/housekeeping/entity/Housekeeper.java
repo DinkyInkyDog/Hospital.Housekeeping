@@ -1,11 +1,17 @@
 package hospital.housekeeping.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
@@ -21,8 +27,11 @@ public class Housekeeper {
 	@Column(unique = true)
 	private Long housekeeperPager;
 	
+	@EqualsAndHashCode.Exclude
+	@ManyToMany(mappedBy = "housekeeperId")
+	private Set<Department> assignedDepartments;
 	
-	private Department primaryDepartment;
-	
-	private Department secondaryDepartment;
+	@OneToMany(mappedBy = "roomsCleaned", cascade = CascadeType.PERSIST)
+	@EqualsAndHashCode.Exclude
+	private Set<Room> roomsCleaned;
 }
