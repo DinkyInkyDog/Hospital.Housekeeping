@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: hospital_housekeeping
+    password: hospital_housekeeping
+    url: jdbc:mysql://localhost:3306/hospital_housekeeping
+  
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+    
+  sql:
+    init:
+      mode: always

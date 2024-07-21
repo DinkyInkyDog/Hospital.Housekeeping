@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -28,10 +29,12 @@ public class Housekeeper {
 	private Long housekeeperPager;
 	
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToMany(mappedBy = "housekeeperId")
 	private Set<Department> assignedDepartments;
 	
 	@OneToMany(mappedBy = "roomsCleaned", cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Room> roomsCleaned;
 }

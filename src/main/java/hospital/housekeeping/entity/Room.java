@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -27,5 +28,6 @@ public class Room {
 	
 	@ManyToOne
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Department roomDepartment;
 }
