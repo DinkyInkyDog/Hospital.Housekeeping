@@ -30,10 +30,10 @@ public class Housekeeper {
 	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "housekeeperId")
+	@ManyToMany(mappedBy = "housekeepers")
 	private Set<Department> assignedDepartments;
 	
-	@OneToMany(mappedBy = "roomsCleaned", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "roomCleanedBy", cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<Room> roomsCleaned;

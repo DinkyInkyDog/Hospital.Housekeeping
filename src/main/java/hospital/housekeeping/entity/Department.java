@@ -33,7 +33,7 @@ public class Department {
 				@JoinColumn(name = "housekeeper_id"))
 	private Set<Housekeeper> housekeepers;
 	
-	@OneToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "roomDepartment", cascade = CascadeType.ALL)
 	@EqualsAndHashCode.Exclude
 	private Set<Room> rooms;
 }
