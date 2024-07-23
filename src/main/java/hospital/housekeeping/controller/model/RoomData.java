@@ -30,10 +30,6 @@ public class RoomData {
 	}
 	
 	
-	public void setRoomName() {
-		
-	}
-	
 	@Data
 	public class DepartmentResponse {
 		private Long departmentId;

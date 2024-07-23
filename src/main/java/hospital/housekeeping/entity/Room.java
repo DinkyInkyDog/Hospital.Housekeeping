@@ -42,15 +42,13 @@ public class Room {
 	private Department roomDepartment;
 	
 	
-	public Room(boolean cleanedToday, Long housekeeperId, Long departmentId) {
+	public Room(boolean cleanedToday, Long housekeeperId, Long departmentId, int index) {
 		this.roomCleanedToday = cleanedToday;
 		
-		HousekeeperData housekeeper = hs.getHousekeeperDataById(housekeeperId);
+		Housekeeper housekeeper = hs.getHousekeeperById(housekeeperId);
+		Department department = hs.getDepartmentById(departmentId);
 		
 		
-		String depfloor = roomDepartment.departmentFloor;
-		char floor = depfloor.charAt(0);
-		
-		this.roomName = "" + floor;
+		this.roomName = "" + department.getDepartmentFloorNumber() + index;
 	}
 }
