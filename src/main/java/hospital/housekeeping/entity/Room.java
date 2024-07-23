@@ -1,5 +1,9 @@
 package hospital.housekeeping.entity;
 
+import org.springframework.data.annotation.Transient;
+
+import hospital.housekeeping.controller.model.HousekeeperData;
+import hospital.service.HospitalService;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +19,9 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 public class Room {
-
+	@Transient
+	private HospitalService hs = new HospitalService();
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long roomId;
@@ -35,7 +41,13 @@ public class Room {
 	@Column (nullable = false)
 	private Department roomDepartment;
 	
+	
 	public Room(boolean cleanedToday, Long housekeeperId, Long departmentId) {
+		this.roomCleanedToday = cleanedToday;
+		
+		HousekeeperData housekeeper = hs.getHousekeeperDataById(housekeeperId);
+		
+		
 		String depfloor = roomDepartment.departmentFloor;
 		char floor = depfloor.charAt(0);
 		

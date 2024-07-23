@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -24,6 +25,9 @@ public class Department {
 	
 	private String departmentName;
 	private String departmentFloor;
+	
+	@ToString.Exclude
+	private Long departmentFloorNumber;
 	
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(cascade = CascadeType.PERSIST)
