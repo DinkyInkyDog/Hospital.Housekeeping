@@ -45,10 +45,14 @@ public class Room {
 	public Room(boolean cleanedToday, Long housekeeperId, Long departmentId, int index) {
 		this.roomCleanedToday = cleanedToday;
 		
-		Housekeeper housekeeper = hs.getHousekeeperById(housekeeperId);
-		Department department = hs.getDepartmentById(departmentId);
+		if(housekeeperId != null) {
+			Housekeeper housekeeper = hs.getHousekeeperById(housekeeperId);
+		}
 		
+		if(departmentId != null) {
+			Department department = hs.getDepartmentById(departmentId);
+		}
 		
-		this.roomName = "" + department.getDepartmentFloorNumber() + index;
+		this.roomName = "" + roomDepartment .getDepartmentFloorNumber() + index;
 	}
 }
