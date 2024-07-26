@@ -3,7 +3,6 @@ package hospital.housekeeping.entity;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +23,7 @@ public class Housekeeper {
 	
 	private String housekeeperFirstName;
 	private String housekeeperLastName;
-	
-	@Column(unique = true)
-	private Long housekeeperPager;
+	private String housekeeperPager;
 	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

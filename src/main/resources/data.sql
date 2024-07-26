@@ -10,10 +10,9 @@ INSERT INTO department (department_floor, department_name, department_floor_numb
 
 
 
-INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Lauren', 'Andrews', 2345);
-INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Cami', 'Cams', 4512);
-INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Edward', 'Rose', 5611);
-INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Bluey', 'Heeler', 0589);
+INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Lauren', 'Andrews', '2345');
+INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Cami', 'Cams', '4512');
+INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Edward', 'Rose', '5611');
+INSERT INTO housekeeper (housekeeper_first_name, housekeeper_last_name, housekeeper_pager) VALUES ('Bluey', 'Heeler', '0589');
 
 
-INSERT INTO department_housekeeper (department_id, housekeeper_id) VALUES ();

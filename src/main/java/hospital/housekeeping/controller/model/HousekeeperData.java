@@ -15,7 +15,7 @@ public class HousekeeperData {
 	private String housekeeperFirstName;
 	private String housekeeperLastName;
 	
-	private Long housekeeperPager;
+	private String housekeeperPager;
 	
 	private Set<DepartmentResponse> assignedDepartments;
 	

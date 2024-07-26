@@ -48,7 +48,7 @@ public class RoomData {
 		private Long housekeeperId;
 		private String housekeeperFirstName;
 		private String housekeeperLastName;
-		private Long housekeeperPager;
+		private String housekeeperPager;
 		
 		public HousekeeperResponse(Housekeeper hk) {
 			housekeeperId = hk.getHousekeeperId();

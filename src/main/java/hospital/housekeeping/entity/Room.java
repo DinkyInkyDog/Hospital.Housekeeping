@@ -1,10 +1,6 @@
 package hospital.housekeeping.entity;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
-
-import hospital.housekeeping.service.HospitalService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +16,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 public class Room {
-	
-	@Transient
-	@Autowired
-	private HospitalService hs = new HospitalService();
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,18 +38,5 @@ public class Room {
 	@JoinColumn(name = "department_id", nullable = false)
 	private Department roomDepartment;
 	
-	
-	public Room(boolean cleanedToday, Long housekeeperId, Long departmentId, int index) {
-		this.roomCleanedToday = cleanedToday;
-		
-		if(housekeeperId != null) {
-			Housekeeper housekeeper = hs.getHousekeeperById(housekeeperId);
-		}
-		
-		if(departmentId != null) {
-			Department department = hs.getDepartmentById(departmentId);
-		}
-		
-		this.roomName = "" + roomDepartment .getDepartmentFloorNumber() + index;
-	}
+
 }
