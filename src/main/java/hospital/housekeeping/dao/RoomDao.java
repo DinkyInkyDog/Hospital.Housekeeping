@@ -1,4 +1,4 @@
-package hospital.dao;
+package hospital.housekeeping.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

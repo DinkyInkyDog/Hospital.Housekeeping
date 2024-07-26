@@ -17,10 +17,11 @@ public class DatabaseLoader implements CommandLineRunner {
 	@Override
 	public void run(String... String) throws Exception {
 		
-		for(int i = 30; i < 100; i++ ) {
-			this.roomsRepo.save(new Room(false, 1L, 3L, i));
-		}
+//		for(int i = 30; i < 100; i++ ) {
+//			this.roomsRepo.save(new Room(false, 1L, 3L, i));
+//		}
 
+		this.roomsRepo.save(new Room(false, null, 1L, 30));
 	}
 
 }

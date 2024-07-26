@@ -1,14 +1,15 @@
 package hospital.housekeeping.entity;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Transient;
 
-import hospital.housekeeping.controller.model.HousekeeperData;
-import hospital.service.HospitalService;
-import jakarta.persistence.Column;
+import hospital.housekeeping.service.HospitalService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,9 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 public class Room {
+	
 	@Transient
+	@Autowired
 	private HospitalService hs = new HospitalService();
 	
 	@Id
@@ -33,12 +36,13 @@ public class Room {
 	
 	@ManyToOne
 	@EqualsAndHashCode.Exclude
+	@JoinColumn(name = "housekeeper_id")
 	private Housekeeper roomCleanedBy;
 	
 	@ManyToOne
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@Column (nullable = false)
+	@JoinColumn(name = "department_id", nullable = false)
 	private Department roomDepartment;
 	
 	
