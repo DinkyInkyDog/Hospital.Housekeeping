@@ -4,6 +4,7 @@ spring:
     password: hospital_housekeeping
     url: jdbc:mysql://localhost:3306/hospital_housekeeping
   
+  
   jpa:
     hibernate:
       ddl-auto: create
