@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/hospital")
 @Slf4j
 public class HospitalHousekeepingController {
-	private enum Entity{
+	public enum Entity{
 		HOUSEKEEPER,
 		ROOM,
 		DEPARTEMENT
@@ -77,7 +77,7 @@ public class HospitalHousekeepingController {
 	public Map<String, String> deleteHousekeeperById(
 			@PathVariable Long keeperId){
 		log.info("deleting housekeeper with ID={}", keeperId);
-		hs.deleteById(keeperId);
+		hs.deleteHousekeeperById(keeperId);
 		return Map.of("Message", "Deletion of Housekeeper with ID=" + keeperId + " was successful.");
 	}
 	
