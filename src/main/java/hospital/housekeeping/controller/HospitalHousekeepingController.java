@@ -28,7 +28,7 @@ public class HospitalHousekeepingController {
 	public enum Entity{
 		HOUSEKEEPER,
 		ROOM,
-		DEPARTEMENT
+		DEPARTMENT
 	}
 	
 	@Autowired
@@ -97,7 +97,7 @@ public class HospitalHousekeepingController {
 	public DepartmentData retrieveDepartmentById(
 			@PathVariable Long departId) {
 		log.info("retrieving department with ID={}", departId);
-		return (DepartmentData) hs.findById(departId, Entity.DEPARTEMENT);
+		return (DepartmentData) hs.findById(departId, Entity.DEPARTMENT);
 	}
 	
 }
