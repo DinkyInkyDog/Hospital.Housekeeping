@@ -103,4 +103,46 @@ public class GlobalExceptionHandler {
 		
 		return em;
 	}
+
+
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	@ResponseStatus(code = HttpStatus.FORBIDDEN)
+	public ExceptionMessage handleIllegalArgumentException(IllegalArgumentException ex, WebRequest webRequest) {
+		return buildIllegalExceptionMessage(ex, webRequest, HttpStatus.FORBIDDEN, LogStatus.MESSAGE_ONLY);
+	}
+
+
+	private ExceptionMessage buildIllegalExceptionMessage(IllegalArgumentException ex, WebRequest webRequest,
+			HttpStatus status, LogStatus logStatus) {
+		String message = ex.toString();
+		String statusReason = status.getReasonPhrase();
+		int statusCode = status.value();
+		String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+		String uri = null;
+		
+		if (webRequest instanceof ServletWebRequest swr) {
+			uri = swr.getRequest().getRequestURI();
+		}
+		
+		if(logStatus == LogStatus.MESSAGE_ONLY) {
+			log.error("Exception: {}", ex.toString());
+		} else {
+			log.error("Exception: {}", ex);
+		}
+		
+		ExceptionMessage em = new ExceptionMessage();
+		em.setMessage(message);
+		em.setStatusCode(statusCode);
+		em.setStatusReason(statusReason);
+		em.setTimeStamp(timeStamp);
+		em.setUri(uri);
+		
+		return em;
+	}
+
 }
+
+
+
+
