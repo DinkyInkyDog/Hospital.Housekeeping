@@ -1,6 +1,8 @@
 package hospital.housekeeping.controller;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +69,14 @@ public class HospitalHousekeepingController {
 		return (HousekeeperData) hs.findById(keeperId, Entity.HOUSEKEEPER);
 	}
 	
+	@GetMapping("/keeper")
+	public Set<HousekeeperData> viewAllHousekeeper(){
+		log.info("retrieveing all housekeepers");
+		Set<HousekeeperData> allHousekeepers = new HashSet<>();
+		allHousekeepers = (Set<HousekeeperData>) hs.findAll(allHousekeepers, Entity.HOUSEKEEPER);
+		return allHousekeepers;
+	}
+	
 	@DeleteMapping("/keeper")
 	public void deleteAllHousekeepers(){
 		log.info("Attempting to delete all housekeepers");
@@ -98,6 +108,13 @@ public class HospitalHousekeepingController {
 			@PathVariable Long departId) {
 		log.info("retrieving department with ID={}", departId);
 		return (DepartmentData) hs.findById(departId, Entity.DEPARTMENT);
+	}
+	
+	@GetMapping("/department")
+	public Set<DepartmentData> viewAllDepartments(){
+		log.info("retrieving all departments");
+		Set<DepartmentData> allDepartments = new HashSet<>();
+		allDepartments = (Set<DepartmentData>) hs.findAll(allDepartments, Entity.DEPARTMENT);
 	}
 	
 }

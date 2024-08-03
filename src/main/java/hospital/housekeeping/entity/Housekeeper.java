@@ -1,5 +1,6 @@
 package hospital.housekeeping.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -28,10 +29,10 @@ public class Housekeeper {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany(mappedBy = "housekeepers")
-	private Set<Department> assignedDepartments;
+	private Set<Department> assignedDepartments = new HashSet<>();
 	
 	@OneToMany(mappedBy = "roomCleanedBy", cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	private Set<Room> roomsCleaned;
+	private Set<Room> roomsCleaned = new HashSet<>();
 }

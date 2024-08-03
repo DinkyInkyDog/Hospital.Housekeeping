@@ -1,5 +1,6 @@
 package hospital.housekeeping.controller.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import hospital.housekeeping.entity.Department;
@@ -17,9 +18,9 @@ public class HousekeeperData {
 	
 	private String housekeeperPager;
 	
-	private Set<DepartmentResponse> assignedDepartments;
+	private Set<DepartmentResponse> assignedDepartments = new HashSet<>();
 	
-	private Set<RoomResponse> roomsCleaned;
+	private Set<RoomResponse> roomsCleaned = new HashSet<>();
 	
 	public HousekeeperData(Housekeeper hk) {
 		housekeeperId = hk.getHousekeeperId();

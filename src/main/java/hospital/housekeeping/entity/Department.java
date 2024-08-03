@@ -1,5 +1,6 @@
 package hospital.housekeeping.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -35,9 +36,9 @@ public class Department {
 			@JoinColumn(name = "department_id"),
 			inverseJoinColumns = 
 				@JoinColumn(name = "housekeeper_id"))
-	private Set<Housekeeper> housekeepers;
+	private Set<Housekeeper> housekeepers = new HashSet<>();
 	
 	@OneToMany(mappedBy = "roomDepartment", cascade = CascadeType.ALL)
 	@EqualsAndHashCode.Exclude
-	private Set<Room> rooms;
+	private Set<Room> rooms = new HashSet<>();
 }

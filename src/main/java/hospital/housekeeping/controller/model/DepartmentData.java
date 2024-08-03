@@ -1,5 +1,6 @@
 package hospital.housekeeping.controller.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -16,9 +17,9 @@ public class DepartmentData {
 	private String departmentName;
 	private String departmentFloor;
 	
-	private Set<HousekeeperResponse> housekeepers;
+	private Set<HousekeeperResponse> housekeepers = new HashSet<>();
 	
-	private Set<RoomResponse> rooms;
+	private Set<RoomResponse> rooms = new HashSet<>();
 	
 	public DepartmentData(Department de) {
 		departmentId = de.getDepartmentId();
