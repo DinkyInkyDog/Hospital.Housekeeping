@@ -1,6 +1,7 @@
 package hospital.housekeeping.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
@@ -177,6 +178,28 @@ public class HospitalService {
 	private Department findDepartmentById(Long departmentId) {
 		return dd.findById(departmentId).orElseThrow(() -> new NoSuchElementException(
 				"department with ID=" + departmentId + " was not found."));
+	}
+
+	public Object findAll(Entity entity) {
+		switch(entity) {
+		case DEPARTMENT:
+			Set<DepartmentData> allDepartments = new HashSet<>();
+			List<Department> departments = dd.findAll();
+			for(Department department : departments) {
+				allDepartments.add( new DepartmentData(department));
+			}
+			
+			return allDepartments;
+		case HOUSEKEEPER:
+			Set<HousekeeperData> allHousekeepers = new HashSet<>();
+			List<Housekeeper> housekeepers = hd.findAll();
+			for(Housekeeper housekeeper : housekeepers) {
+				allHousekeepers.add(new HousekeeperData(housekeeper));
+			}
+			return allHousekeepers;
+		default:
+			throw new IllegalArgumentException("entity= " + entity.toString() + "Isn't a valid entity. Enter either HOUSEKEEPER or DEPARTMENT.");
+		}
 	}
 
 

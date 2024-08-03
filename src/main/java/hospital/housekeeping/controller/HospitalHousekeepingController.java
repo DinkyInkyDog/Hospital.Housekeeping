@@ -73,7 +73,7 @@ public class HospitalHousekeepingController {
 	public Set<HousekeeperData> viewAllHousekeeper(){
 		log.info("retrieveing all housekeepers");
 		Set<HousekeeperData> allHousekeepers = new HashSet<>();
-		allHousekeepers = (Set<HousekeeperData>) hs.findAll(allHousekeepers, Entity.HOUSEKEEPER);
+		allHousekeepers = (Set<HousekeeperData>) hs.findAll(Entity.HOUSEKEEPER);
 		return allHousekeepers;
 	}
 	
@@ -114,7 +114,8 @@ public class HospitalHousekeepingController {
 	public Set<DepartmentData> viewAllDepartments(){
 		log.info("retrieving all departments");
 		Set<DepartmentData> allDepartments = new HashSet<>();
-		allDepartments = (Set<DepartmentData>) hs.findAll(allDepartments, Entity.DEPARTMENT);
+		allDepartments = (Set<DepartmentData>) hs.findAll(Entity.DEPARTMENT);
+		return allDepartments;
 	}
 	
 }
