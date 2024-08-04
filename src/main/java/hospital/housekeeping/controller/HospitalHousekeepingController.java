@@ -101,6 +101,12 @@ public class HospitalHousekeepingController {
 		return (RoomData) hs.saveEntity(rd, Entity.ROOM);
 	}
 	
+	@PostMapping("/room/{departmentId}")
+	public Set<RoomData> bulkAddRooms(
+			@PathVariable Long departmentId) {
+		log.info("creating batch of rooms for department with ID={}", departmentId);
+		return hs.bulkRoomAdd(departmentId);
+	}
 	
 	//-----------Departments-----------------
 	@GetMapping("/department/{departId}")

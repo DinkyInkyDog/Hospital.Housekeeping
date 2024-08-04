@@ -174,12 +174,13 @@ public class HospitalService {
 		
 	}
 	
-	
+	@Transactional(readOnly = true)
 	private Department findDepartmentById(Long departmentId) {
 		return dd.findById(departmentId).orElseThrow(() -> new NoSuchElementException(
 				"department with ID=" + departmentId + " was not found."));
 	}
 
+	@Transactional(readOnly = true)
 	public Object findAll(Entity entity) {
 		switch(entity) {
 		case DEPARTMENT:
@@ -200,6 +201,18 @@ public class HospitalService {
 		default:
 			throw new IllegalArgumentException("entity= " + entity.toString() + "Isn't a valid entity. Enter either HOUSEKEEPER or DEPARTMENT.");
 		}
+	}
+
+	public Set<RoomData> bulkRoomAdd(Long departmentId) {
+		Set<RoomData> createdRooms = new HashSet<>();
+		for(int i = 25; i < 75; i++) {
+			Room newRoom = new Room();
+			newRoom.setRoomName(""+ departmentId + i);
+			newRoom.setRoomDepartment(dd.findById(departmentId).orElseThrow(() -> new NoSuchElementException(""
+					+ "department with ID = " + departmentId + " was not found.")));
+			createdRooms.add(new RoomData(rd.save(newRoom)));
+		}
+		return createdRooms;
 	}
 
 

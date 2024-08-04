@@ -4,9 +4,11 @@ import hospital.housekeeping.entity.Department;
 import hospital.housekeeping.entity.Housekeeper;
 import hospital.housekeeping.entity.Room;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@NoArgsConstructor
 public class RoomData {
 	
 	
