@@ -7,8 +7,10 @@ import hospital.housekeeping.entity.Department;
 import hospital.housekeeping.entity.Housekeeper;
 import hospital.housekeeping.entity.Room;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class HousekeeperData {
 
 	private Long housekeeperId;
@@ -38,7 +40,7 @@ public class HousekeeperData {
 	}
 	
 	@Data
-	public class DepartmentResponse {
+	public static class DepartmentResponse {
 		private Long departmentId;
 		private String departmentName;
 		private String departmentFloor;
@@ -48,10 +50,12 @@ public class HousekeeperData {
 			departmentName = dd.getDepartmentName();
 			departmentFloor = dd.getDepartmentFloor();
 		}
+		
+		
 	}
 	
 	@Data
-	public class RoomResponse {
+	public static class RoomResponse {
 		private Long roomId;
 		private String roomName;
 		private boolean roomCleanedToday;

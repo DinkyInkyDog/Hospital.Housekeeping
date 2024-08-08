@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -141,6 +143,41 @@ public class GlobalExceptionHandler {
 		return em;
 	}
 
+	
+	@ExceptionHandler(InvalidDefinitionException.class)
+	@ResponseStatus(code = HttpStatus.FORBIDDEN)
+	public ExceptionMessage handleInvalidDefinitionExcepiton(InvalidDefinitionException ex, WebRequest webRequest) {
+		return buildInvalidDefExceptionMessage(ex, webRequest, HttpStatus.FORBIDDEN, LogStatus.MESSAGE_ONLY);
+	}
+	
+	private ExceptionMessage buildInvalidDefExceptionMessage(InvalidDefinitionException ex, WebRequest webRequest,
+			HttpStatus status, LogStatus logStatus) {
+		String message = ex.toString();
+		String statusReason = status.getReasonPhrase();
+		int statusCode = status.value();
+		String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+		String uri = null;
+		
+		if (webRequest instanceof ServletWebRequest swr) {
+			uri = swr.getRequest().getRequestURI();
+		}
+		
+		if(logStatus == LogStatus.MESSAGE_ONLY) {
+			log.error("Exception: {}", ex.toString());
+		} else {
+			log.error("Exception: {}", ex);
+		}
+		
+		ExceptionMessage em = new ExceptionMessage();
+		em.setMessage(message);
+		em.setStatusCode(statusCode);
+		em.setStatusReason(statusReason);
+		em.setTimeStamp(timeStamp);
+		em.setUri(uri);
+		
+		return em;
+	}
+	
 }
 
 

@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import hospital.housekeeping.controller.HospitalHousekeepingController.Entity;
 import hospital.housekeeping.controller.model.DepartmentData;
 import hospital.housekeeping.controller.model.HousekeeperData;
+import hospital.housekeeping.controller.model.HousekeeperData.DepartmentResponse;
+import hospital.housekeeping.controller.model.HousekeeperData.RoomResponse;
 import hospital.housekeeping.controller.model.RoomData;
 import hospital.housekeeping.dao.DepartmentDao;
 import hospital.housekeeping.dao.HousekeeperDao;
@@ -56,7 +58,8 @@ public class HospitalService {
 		case HOUSEKEEPER:
 			HousekeeperData keeper = (HousekeeperData) data;
 			Long keeperId = keeper.getHousekeeperId();
-			 
+			
+			
 			Housekeeper houseKeeper = findOrCreateHousekeeper(keeperId);
 			setFeildsInHousekeeper(houseKeeper, keeper);
 			return new HousekeeperData (hd.save(houseKeeper));
@@ -77,7 +80,12 @@ public class HospitalService {
 		rm.setRoomId(room.getRoomId());
 		rm.setRoomName(room.getRoomName());
 		rm.setRoomCleanedToday(room.isRoomCleanedToday());
-		rm.setRoomCleanedBy(findHousekeeperById(room.getRoomCleanedBy().getHousekeeperId()));
+
+		if (findHousekeeperById(room.getRoomCleanedBy().getHousekeeperId()) != null) {
+			rm.setRoomCleanedBy(findHousekeeperById(room.getRoomCleanedBy().getHousekeeperId()));
+		}
+		
+		
 		rm.setRoomDepartment(findDepartmentById(room.getRoomDepartment().getDepartmentId()));
 	}
 
@@ -101,6 +109,9 @@ public class HospitalService {
 		hk.setHousekeeperFirstName(hkd.getHousekeeperFirstName());
 		hk.setHousekeeperLastName(hkd.getHousekeeperLastName());
 		hk.setHousekeeperPager(hkd.getHousekeeperPager());
+		
+		
+		
 		
 	}
 
@@ -203,6 +214,7 @@ public class HospitalService {
 		}
 	}
 
+	@Transactional(readOnly = false)
 	public Set<RoomData> bulkRoomAdd(Long departmentId) {
 		Set<RoomData> createdRooms = new HashSet<>();
 		for(int i = 25; i < 75; i++) {
