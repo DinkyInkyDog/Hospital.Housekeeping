@@ -26,9 +26,15 @@ public class RoomData {
 		roomId = room.getRoomId();
 		roomName = room.getRoomName();
 		roomCleanedToday = room.isRoomCleanedToday();
-		
-		roomCleanedBy = new HousekeeperResponse(room.getRoomCleanedBy());
+
+		if (room.getRoomCleanedBy() != null) {
+			roomCleanedBy = new HousekeeperResponse(room.getRoomCleanedBy());
+		}
+		try {
 		roomDepartment = new DepartmentResponse(room.getRoomDepartment());
+		}catch (NullPointerException e) {
+			throw new NullPointerException("Room with ID=" + roomId +" must have a department it's assigned to.");
+		}
 	}
 	
 	
