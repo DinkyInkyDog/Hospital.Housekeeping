@@ -95,12 +95,12 @@ public class HospitalHousekeepingController {
 	
 	
 	//--------------Rooms--------------
-	@PutMapping("/room/{roomId}")
+	@PutMapping("/room/{roomId}/keeper/{keeperId}")
 	public RoomData updateRoomById(
 			@PathVariable Long roomId,
-			@RequestBody RoomData rd) {
-		log.info("updating room with ID={}", roomId);
-		return (RoomData) hs.saveEntity(rd, Entity.ROOM);
+			@PathVariable Long keeperId) {
+		log.info("updating room with ID={} with cleaned by housekeeper with ID={}", roomId, keeperId);
+		return hs.updateRoom(roomId, keeperId);
 	}
 	
 	@PostMapping("/room/{departmentId}")

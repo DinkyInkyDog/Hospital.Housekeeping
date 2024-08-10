@@ -227,6 +227,20 @@ public class HospitalService {
 		return createdRooms;
 	}
 
+	
+	@Transactional(readOnly = false)
+	public RoomData updateRoom(Long roomId, Long keeperId) {
+		Room room = rd.findById(roomId).orElseThrow(() ->  new NoSuchElementException("Room with ID=" +roomId+ " was not found"));
+		Housekeeper housekeeper = hd.findById(keeperId).orElseThrow(()-> new NoSuchElementException("Housekeeper with ID=" +keeperId+ " was not found"));
+		
+		room.setRoomCleanedToday(true);
+		room.setRoomCleanedBy(housekeeper);
+		
+		housekeeper.getRoomsCleaned().add(room);
+		hd.save(housekeeper);
+		return new RoomData(rd.save(room));
+	}
+
 
 
 }
