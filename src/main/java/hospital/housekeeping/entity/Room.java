@@ -1,6 +1,7 @@
 package hospital.housekeeping.entity;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Room {
 	@EqualsAndHashCode.Exclude
 	private boolean roomCleanedToday;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
 	@JoinColumn(name = "housekeeper_id")
 	private Housekeeper roomCleanedBy;

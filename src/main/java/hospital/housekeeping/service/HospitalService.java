@@ -140,9 +140,13 @@ public class HospitalService {
 	
 	@Transactional(readOnly = false)
 	public HousekeeperData linkKeeperToDepartment(Long departId, Long keeperId) {
-		Department depart = findDepartmentById(departId);
-		Housekeeper keeper = findHousekeeperById(keeperId);
+		Department depart = dd.findById(departId).orElseThrow(()-> new NoSuchElementException(
+				"Department with ID=" + departId + " was not found."));
+		Housekeeper keeper = hd.findById(keeperId).orElseThrow(() -> new NoSuchElementException(
+				"Department with ID=" + keeperId + " was not found."));
 		keeper.getAssignedDepartments().add(depart);
+		depart.getHousekeepers().add(keeper);
+		dd.save(depart);
 		return new HousekeeperData (hd.save(keeper));
 	}
 
@@ -177,11 +181,33 @@ public class HospitalService {
 
 	@Transactional(readOnly = false)
 	public void deleteHousekeeperById(Long keeperId) {
-		if (hd.existsById(keeperId)) {
-			hd.deleteById(keeperId);
-			} else {
-				throw new NoSuchElementException("There is no Housekeeper with ID=" + keeperId);
+		
+			Housekeeper housekeeper = hd.findById(keeperId).orElseThrow(() -> new NoSuchElementException("There is no Housekeeper with ID=" + keeperId));
+			
+			if (!housekeeper.getAssignedDepartments().isEmpty()) {
+				for (Department department : housekeeper.getAssignedDepartments()) {
+					department.getHousekeepers().remove(housekeeper);
+					dd.save(department);
+				}
+				housekeeper.getAssignedDepartments().clear();
 			}
+			
+			
+			if (!housekeeper.getRoomsCleaned().isEmpty()) {
+				for (Room room : housekeeper.getRoomsCleaned()) {
+					room.setRoomCleanedBy(null);
+					room.setRoomCleanedToday(false);
+					rd.save(room);
+				}
+				housekeeper.getRoomsCleaned().clear();
+			}
+			
+			
+			hd.save(housekeeper);
+			
+			hd.deleteById(keeperId);
+			 
+			
 		
 	}
 	

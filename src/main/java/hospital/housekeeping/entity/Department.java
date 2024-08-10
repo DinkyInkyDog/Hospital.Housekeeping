@@ -31,11 +31,7 @@ public class Department {
 	private Long departmentFloorNumber;
 	
 	@EqualsAndHashCode.Exclude
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "department_housekeeper", joinColumns = 
-			@JoinColumn(name = "department_id"),
-			inverseJoinColumns = 
-				@JoinColumn(name = "housekeeper_id"))
+	@ManyToMany(mappedBy = "assignedDepartments", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Housekeeper> housekeepers = new HashSet<>();
 	
 	@OneToMany(mappedBy = "roomDepartment", cascade = CascadeType.ALL)
