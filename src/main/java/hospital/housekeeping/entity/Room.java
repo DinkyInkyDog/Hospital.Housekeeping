@@ -30,6 +30,7 @@ public class Room {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@JoinColumn(name = "housekeeper_id")
 	private Housekeeper roomCleanedBy;
 	

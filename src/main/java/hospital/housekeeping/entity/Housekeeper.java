@@ -32,14 +32,10 @@ public class Housekeeper {
 	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "department_housekeeper", joinColumns = 
-	@JoinColumn(name = "department_id"),
-	inverseJoinColumns = 
-		@JoinColumn(name = "housekeeper_id"))
+	@ManyToMany(mappedBy = "housekeepers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Department> assignedDepartments = new HashSet<>();
 	
-	@OneToMany(mappedBy = "roomCleanedBy", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "roomCleanedBy", cascade = CascadeType.PERSIST)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<Room> roomsCleaned = new HashSet<>();

@@ -31,10 +31,16 @@ public class Department {
 	private Long departmentFloorNumber;
 	
 	@EqualsAndHashCode.Exclude
-	@ManyToMany(mappedBy = "assignedDepartments", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ToString.Exclude
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "department_housekeeper", joinColumns = 
+	@JoinColumn(name = "department_id"),
+	inverseJoinColumns = 
+		@JoinColumn(name = "housekeeper_id"))
 	private Set<Housekeeper> housekeepers = new HashSet<>();
 	
 	@OneToMany(mappedBy = "roomDepartment", cascade = CascadeType.ALL)
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<Room> rooms = new HashSet<>();
 }
